@@ -7,8 +7,6 @@ description: |
   with content and templates and renders them into a full HTML website.
 confinement: strict
 grade: devel # "devel" or "stable"
-environment:
-    GO111MODULE: on
 
 apps:
   hugo:
@@ -29,7 +27,7 @@ parts:
       export PATH=$GOPATH/bin:$PATH
       cd $GOPATH/src/github.com/gohugoio/hugo
       echo ' * Running "go get -v github.com/magefile/mage"...'
-      go get -v github.com/magefile/mage
+      env GO111MODULE=on go get -v github.com/magefile/mage
       echo ' * Running "mage -v test"...'
       mage -v test
       echo " * Building hugo (build tag: extended)..."
