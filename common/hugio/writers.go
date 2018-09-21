@@ -36,8 +36,6 @@ func (m multiWriteCloser) Close() error {
 // provided writers.
 func NewMultiWriteCloser(writeClosers ...io.WriteCloser) io.WriteCloser {
 	writers := make([]io.Writer, len(writeClosers))
-	for i, w := range writeClosers {
-		writers[i] = w
-	}
+	copy(writers, writeClosers)
 	return multiWriteCloser{Writer: io.MultiWriter(writers...), closers: writeClosers}
 }
